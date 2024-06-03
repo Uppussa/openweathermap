@@ -4,7 +4,7 @@ import DetalleAbajo from './DetalleAbajo'
 
 const Detalles = () => {
     return (
-        <div class="flex flex-col p-20  h-screen ">
+        <div class="flex flex-col p-20  h-screen justify-around">
             <DetallaArri />
             <DetalleAbajo />
         </div>
