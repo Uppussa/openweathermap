@@ -13,6 +13,7 @@ export default {
         customButton: 'rgba(110, 112, 122, 1)',
         customtext: 'rgba(231, 231, 235, 1)',
         
+        
       },
     },
   },

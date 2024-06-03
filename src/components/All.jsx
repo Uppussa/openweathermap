@@ -5,12 +5,20 @@ import Detalles from './Detalles'
 const All = () => {
 
     return (
-        <div className="min-h-screen flex flex-col md:flex-row bg-customDark text-white">
+        <div className="min-h-screen flex flex-col md:flex-row bg-customDark text-white w-full">
 
-            <Modal />
+  
+  <div className="md:w-34">
+    <Modal />
+  </div>
 
-            <Detalles />
-        </div>
+ 
+  <div className="md:w-full">
+    <Detalles />
+  </div>
+  
+</div>
+
     )
 }
 

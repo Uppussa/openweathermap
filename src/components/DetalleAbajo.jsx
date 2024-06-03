@@ -2,7 +2,7 @@ import React from 'react'
 
 const DetalleAbajo = () => {
     return (
-        <div className='flex flex-col w-ful'>
+        <div >
             <h2 className="text-xl mb-4">Today's Highlights</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-customSecondaryDark p-4 rounded text-center">

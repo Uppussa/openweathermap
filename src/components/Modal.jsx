@@ -23,7 +23,7 @@ function Modal() {
     </div>
     
     {/* Main Content */}
-    <div className="flex-grow bg-customSecondaryDark">
+    <div className="flex-grow bg-customSecondaryDark " style={{ width: '84%' }}>
       <button className="m-4 p-2 bg-customButton text-customtext rounded" onClick={toggleSidebar}>Seach for places</button> 
       <div className="flex justify-between items-center mb-4">
     <h1 className='text-black'>hola aqui va la imagen </h1>

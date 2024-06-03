@@ -4,13 +4,10 @@ import DetalleAbajo from './DetalleAbajo'
 
 const Detalles = () => {
     return (
-        <>
-            <div className='w-11/12 mt-16 p-16'>
-                <DetallaArri />
-
-                <DetalleAbajo />
-            </div>
-        </>
+        <div class="flex flex-col p-20  h-screen ">
+            <DetallaArri />
+            <DetalleAbajo />
+        </div>
     )
 }
 
