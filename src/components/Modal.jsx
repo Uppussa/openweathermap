@@ -32,3 +32,7 @@ function Modal() {
 }
 
 export default Modal;
+
+
+// api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+// 537f062506c5be127447c17ac2332472
