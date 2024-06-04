@@ -7,7 +7,6 @@ function Modal() {
     setIsOpen(!isOpen);
   };
 
-
   return (
     <div className="flex h-screen w-[450px] bg-customSecondaryDark">
       {/* Sidebar */}
@@ -23,8 +22,8 @@ function Modal() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-grow bg-customSecondaryDark flex justify-between" style={{ width: '84%', height: 'fit-content'}}>
-        <button className="m-12 p-2 bg-customButton text-customtext rounded" onClick={toggleSidebar}>Seach for places</button>
+      <div className="flex-grow bg-customSecondaryDark flex justify-between" style={{ width: '84%', height: 'fit-content' }}>
+        <button className="m-12 p-2 bg-customButton text-customtext rounded" onClick={toggleSidebar}>Search for places</button>
         <a href="#" className="m-12"><i className='bx bx-current-location'></i></a>
       </div>
     </div>
@@ -32,7 +31,3 @@ function Modal() {
 }
 
 export default Modal;
-
-
-// api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-// 537f062506c5be127447c17ac2332472
