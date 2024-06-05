@@ -4,7 +4,7 @@ const WeatherContext = createContext();
 
 const WeatherProvider = ({ children }) => {
     const [weatherData, setWeatherData] = useState(null);
-    const [location, setLocation] = useState(null); // Cambiamos el valor inicial a null
+    const [location, setLocation] = useState(null);
     const [city, setCity] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -19,6 +19,7 @@ const WeatherProvider = ({ children }) => {
             }
             const data = await response.json();
             setWeatherData(data);
+            setCity(data.city.name);
         } catch (err) {
             setError(err.message);
         } finally {
@@ -26,13 +27,22 @@ const WeatherProvider = ({ children }) => {
         }
     };
 
-    const fetchCityName = async (lat, lon) => {
+    const searchCity = async (cityName) => {
         try {
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=537f062506c5be127447c17ac2332472`);
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=537f062506c5be127447c17ac2332472`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
             const data = await response.json();
-            setCity(data.name);
+            const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=537f062506c5be127447c17ac2332472`);
+            if (!forecastResponse.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const forecastData = await forecastResponse.json();
+            return forecastData;
         } catch (error) {
-            console.error('Error fetching city name:', error);
+            console.error('Error fetching city data:', error);
+            throw error;
         }
     };
 
@@ -55,15 +65,14 @@ const WeatherProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        getLocation(); // Llama a getLocation para obtener la ubicación actual
-    }, []); // El segundo argumento asegura que useEffect solo se ejecute una vez al inicio
+        getLocation();
+    }, []);
 
     useEffect(() => {
-        if (location) { // Verifica que location tenga un valor antes de llamar a fetchWeather y fetchCityName
+        if (location) {
             fetchWeather(location.lat, location.lon);
-            fetchCityName(location.lat, location.lon);
         }
-    }, [location]); // Se ejecutará cada vez que location cambie
+    }, [location]);
 
     return (
         <WeatherContext.Provider
@@ -71,9 +80,10 @@ const WeatherProvider = ({ children }) => {
                 weatherData,
                 city,
                 getLocation,
-                setLocation, // Asegúrate de incluir setLocation en el value del contexto
+                setLocation,
+                searchCity,
                 loading,
-                error,
+                error
             }}
         >
             {children}

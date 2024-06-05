@@ -6,31 +6,30 @@ import SearchModal from './SearchModal';
 
 const All = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { weatherData, city, setLocation, loading, error } = useContext(WeatherContext);
+  const { weatherData, loading, error } = useContext(WeatherContext);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
   return (
-   
     <WeatherProvider>
-    <div className="min-h-screen flex flex-col md:flex-row bg-customDark text-white w-full">
+      <div className="min-h-screen flex flex-col md:flex-row bg-customDark text-white w-full">
         <div className="md:w-34 relative">
-            {loading && <div>Loading...</div>}
-            {error && <div>Error: {error}</div>}
-            {!loading && !error && (
-                <>
-                    <Modal weatherData={weatherData} toggleSidebar={toggleModal} />
-                    <SearchModal isModalOpen={isModalOpen} toggleModal={toggleModal} setLocation={setLocation} city={city}/>
-                </>
-            )}
+          {loading && <div>Loading...</div>}
+          {error && <div>Error: {error}</div>}
+          {!loading && !error && (
+            <>
+              <Modal weatherData={weatherData} toggleSidebar={toggleModal} />
+              <SearchModal isModalOpen={isModalOpen} toggleModal={toggleModal} />
+            </>
+          )}
         </div>
         <div className="md:w-full">
-            <Detalles/>
+          <Detalles />
         </div>
-    </div>
-</WeatherProvider>
+      </div>
+    </WeatherProvider>
   );
 };
 

@@ -24,7 +24,7 @@ const DetallaArri = () => {
           </p>
           <img src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`} alt="weather icon" className="mx-auto w-10 h-10" />
           <p className="text-xs py-10">
-            <span className="font-semibold">{convertTemperature(forecast.main.temp_max)}°{unit}</span> {convertTemperature(forecast.main.temp_min)}°{unit}
+            <span className="font-semibold">{convertTemperature(forecast.main.temp_max)}°{unit} Mx -</span> {convertTemperature(forecast.main.temp_min)}°{unit} Mn
           </p>
         </div>
       ))}
