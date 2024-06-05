@@ -22,7 +22,7 @@ const DetallaArri = () => {
           <p className="text-xs mb-1 py-4">
             {new Date(forecast.dt * 1000).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
           </p>
-          <img src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`} alt="weather icon" className="mx-auto mb-2 w-10 h-10" />
+          <img src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`} alt="weather icon" className="mx-auto w-10 h-10" />
           <p className="text-xs py-10">
             <span className="font-semibold">{convertTemperature(forecast.main.temp_max)}°{unit}</span> {convertTemperature(forecast.main.temp_min)}°{unit}
           </p>
