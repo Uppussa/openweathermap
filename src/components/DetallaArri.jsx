@@ -17,36 +17,28 @@ const DetallaArri = () => {
   };
 
   return (
-    <div className="relative max-w-4xl mx-auto p-4">
-      <div className="absolute top-4 right-16 flex space-x-2 z-10">
-        <button
-          className={`absolute bg-white text-black p-2 rounded-full md:top-12 md:right-36 ${unit === 'C' ? 'bg-blue-500' : 'bg-white'}`}
-          style={{ width: '40px', height: '40px' }}
-          onClick={() => setUnit('C')}
-        >
-          °C
-        </button>
-        <button
-          className={`absolute bg-gray-700 text-white p-2 rounded-full md:top-12 md:right-24 ${unit === 'F' ? 'bg-blue-500' : 'bg-gray-700'}`}
-          style={{ width: '40px', height: '40px' }}
-          onClick={() => setUnit('F')}
-        >
-          °F
-        </button>
-      </div>
-      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-        {dailyForecasts.slice(0, 5).map((forecast, index) => (
-          <div key={index} className="bg-customSecondaryDark p-3 rounded-lg text-center w-full h-44">
-            <p className="text-xs mb-1 py-4">
-              {new Date(forecast.dt * 1000).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
-            </p>
-            <img src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`} alt="weather icon" className="mx-auto w-10 h-10" />
-            <p className="text-xs py-2">
-              <span className="font-semibold">{convertTemperature(forecast.main.temp_max)}°{unit} Mx -</span> {convertTemperature(forecast.main.temp_min)}°{unit} Mn
-            </p>
-          </div>
-        ))}
-      </div>
+    <div className="grid lg:grid-cols-5 w-full max-w-4xl mx-auto">
+      {dailyForecasts.slice(0, 5).map((forecast, index) => (
+        <div key={index} className="bg-customSecondaryDark p-3 rounded-lg text-center w-32 h-44">
+          <p className="text-xs mb-1 py-4">
+            {new Date(forecast.dt * 1000).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
+          </p>
+          <img src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`} alt="weather icon" className="mx-auto w-10 h-10" />
+          <p className="text-xs py-10">
+            <span className="font-semibold">{convertTemperature(forecast.main.temp_max)}°{unit} Mx -</span> {convertTemperature(forecast.main.temp_min)}°{unit} Mn
+          </p>
+        </div>
+      ))}
+      <button
+        className={`absolute bg-white text-black p-2 rounded-full md:top-12 md:right-36 ${unit === 'C' ? 'bg-blue-500' : 'bg-white'}`}
+        style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+        onClick={() => setUnit('C')}
+      >°C</button>
+      <button
+        className={`absolute bg-gray-700 text-white p-2 rounded-full md:top-12 md:right-24 ${unit === 'F' ? 'bg-blue-500' : 'bg-gray-700'}`}
+        style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+        onClick={() => setUnit('F')}
+      >°F</button>
     </div>
   );
 };
