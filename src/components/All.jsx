@@ -28,7 +28,7 @@ const All = () => {
            location={location}
            setLocation={setLocation} />
         </div>
-        <div className="md:w-full">
+        <div className="md:w-full " style={{margin: 'auto'}}>
           <Detalles />
         </div>
       </div>

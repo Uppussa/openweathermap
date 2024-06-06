@@ -33,7 +33,7 @@ function SearchModal({ isModalOpen, toggleModal }) {
     
 
     return (
-        <div className={`fixed top-0 left-0 h-full w-[435px] bg-[#1E213A] text-white transition-transform duration-300 ease-in-out transform ${isModalOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className={`fixed top-0 left-0 h-screen w-[435px] bg-[#1E213A] text-white transition-transform duration-300 ease-in-out transform ${isModalOpen ? 'translate-x-0' : '-translate-x-full'}`}>
             <button className="absolute right-4 text-white text-3xl p-2 hover:bg-gray-700 rounded-full" onClick={toggleModal}>×</button>
             <div className="p-6 pt-12">
                 <div className="relative mb-6">
