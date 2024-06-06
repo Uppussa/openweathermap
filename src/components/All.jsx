@@ -7,6 +7,7 @@ import SearchModal from './SearchModal';
 const All = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { weatherData, loading, error } = useContext(WeatherContext);
+  const [location, setLocation] = useState('');
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -21,7 +22,7 @@ const All = () => {
           {!loading && !error && (
             <>
               <Modal weatherData={weatherData} toggleSidebar={toggleModal} />
-              <SearchModal isModalOpen={isModalOpen} toggleModal={toggleModal} />
+              <SearchModal isModalOpen={isModalOpen} toggleModal={toggleModal} location={location} setLocation={setLocation}/>
             </>
           )}
         </div>

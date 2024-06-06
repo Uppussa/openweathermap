@@ -28,21 +28,31 @@ const WeatherProvider = ({ children }) => {
     };
 
     const searchCity = async (cityName) => {
+        setLoading(true);
+        setError(null);
         try {
             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=537f062506c5be127447c17ac2332472`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=537f062506c5be127447c17ac2332472`);
-            if (!forecastResponse.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const forecastData = await forecastResponse.json();
-            return forecastData;
+            const { coord } = data;
+            setLocation({ lat: coord.lat, lon: coord.lon });
+            await fetchWeather(coord.lat, coord.lon);
         } catch (error) {
-            console.error('Error fetching city data:', error);
-            throw error;
+            setError(error.message);
+        }  finally{
+            setLoading(false);
+        }
+    };
+
+    const fetchCityName = async (lat, lon) => {
+        try {
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=537f062506c5be127447c17ac2332472`);
+            const data = await response.json();
+            setCity(data.name);
+        } catch (error) {
+            console.error('Error fetching city name:', error);
         }
     };
 
@@ -71,6 +81,7 @@ const WeatherProvider = ({ children }) => {
     useEffect(() => {
         if (location) {
             fetchWeather(location.lat, location.lon);
+            fetchCityName(location.lat, location.lon);
         }
     }, [location]);
 
