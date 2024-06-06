@@ -1,45 +1,30 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { WeatherContext } from "../hooks/useConnection";
 
 const Location = () => {
   const { setLocation } = useContext(WeatherContext);
-  const [locationg, setLocationg] = useState({});
 
-  const success = (position) => {
-    setLocationg({
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude
-    });
-  };
-
-  const error = () => {
-    console.log('Unable to retrieve your location');
-  };
-
-  const options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
-  };
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(success, error, options);
-  }, []);
-
-  useEffect(() => {
-    if ("latitude" in locationg) {
-      setLocation({
-        lat: locationg.latitude,
-        lon: locationg.longitude,
-      });
+  const handleLocationClick = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
+        },
+        (error) => {
+          console.error('Error getting location:', error);
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported by this browser.');
     }
-  }, [locationg, setLocation]);
+  };
 
   return (
     <div>
-      <button className="text-white" onClick={() => {
-        navigator.geolocation.getCurrentPosition(success, error, options);
-      }}>
+      <button className="text-white" onClick={handleLocationClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
